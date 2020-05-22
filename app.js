@@ -16,7 +16,7 @@ let coin = document.querySelector('#coin');
 // Adding event listener to window because, we want to track the event in whole page
 // if it occurs not in just one particular element
 
-window.addEventListener('keyup' , function( event ) {
+window.addEventListener('keydown' , function( event ) {
 	switch( event.key ) {
 		case 'ArrowUp':
 		 	// character.style.top gives blank because it
@@ -37,12 +37,17 @@ window.addEventListener('keyup' , function( event ) {
 		case 'ArrowRight':
 			let currentRight = getPosition( character.style.left );
 			character.style.left = `${currentRight + 50}px`;
+			character.style.transform = 'scale( 1 , 1)';
 			break;		
 		case 'ArrowLeft':
 			let currentLeft = getPosition( character.style.left );
 			character.style.left = `${currentLeft - 50}px`;
+			// Scaling imgae on basis of x axis - flips the image
+			character.style.transform = 'scale( -1 , 1)';
 			break;				
 	}
+	if ( isTouching( character , coin ) )
+		moveCoin();
 })
 
 const getPosition = ( position ) => {
@@ -57,4 +62,18 @@ const getPosition = ( position ) => {
 
 	// Position is in string need to convert it into int
 	return parseInt(position.slice( 0 , -2));
+}
+
+const moveCoin = () => {
+	/*
+	y
+	|	c 		c
+	|	c
+	| c		c  c
+	|______________ x
+	 */
+	const x = Math.floor( Math.random() * window.innerWidth );
+	const y = Math.floor( Math.random() * window.innerHeight );
+	coin.style.top = `${y}px`;
+	coin.style.left = `${x}px`;
 }
