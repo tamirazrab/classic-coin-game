@@ -12,6 +12,7 @@ function isTouching(a, b) {
 
 let character = document.querySelector('#player');
 let coin = document.querySelector('#coin');
+let container = document.querySelector('.game-area');
 
 // Adding event listener to window because, we want to track the event in whole page
 // if it occurs not in just one particular element
@@ -72,8 +73,18 @@ const moveCoin = () => {
 	| c		c  c
 	|______________ x
 	 */
-	const x = Math.floor( Math.random() * window.innerWidth );
-	const y = Math.floor( Math.random() * window.innerHeight );
+	// const x = Math.floor( Math.random() * window.innerWidth );
+	// const y = Math.floor( Math.random() * window.innerHeight );
+	if ( !container.style.width || !container.style.height ) {
+		container.style.width = `900px`;
+		container.style.height = `700px`;
+	}
+	let width = parseInt( container.style.width.slice( 0 , -2 ));
+	// const made x and y to NaN - I don't have slightest idea of this behaviour
+	let x = Math.floor( Math.random() * width );
+	let y = Math.floor( Math.random() * container.style.height );
+
 	coin.style.top = `${y}px`;
 	coin.style.left = `${x}px`;
+	
 }
