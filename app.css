@@ -1,6 +1,27 @@
 img {
 	width: 100px;
-	position: absolute;
+	position: relative;
 	top: 100px;
 	left: 100px;
+	/* display: block; */
+	margin-left: auto;
+	margin-right: auto;
 }
+
+header{
+	width: 900px;
+	height: 70px;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	border: 1px solid black;
+}
+
+.game-area {
+	border: 0.5px black solid;
+	width:  900px;
+	height: 700px;
+	margin: auto; 
+	/* for centering the element */
+}
+
