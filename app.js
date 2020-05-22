@@ -80,9 +80,11 @@ const moveCoin = () => {
 		container.style.height = `700px`;
 	}
 	let width = parseInt( container.style.width.slice( 0 , -2 ));
+	let height = parseInt( container.style.height.slice( 0 , -2 ));
+	width -= 150 , height -= 200;
 	// const made x and y to NaN - I don't have slightest idea of this behaviour
 	let x = Math.floor( Math.random() * width );
-	let y = Math.floor( Math.random() * container.style.height );
+	let y = Math.floor( Math.random() * height );
 
 	coin.style.top = `${y}px`;
 	coin.style.left = `${x}px`;
