@@ -64,12 +64,15 @@ const moveCharacter = ( element , position , amount ) => {
 	let width = parseInt( container.style.width.slice( 0 , -2 ));
 	let height = parseInt( container.style.height.slice( 0 , -2 ));
 
+	// Character crossing top - currentPos = -100
+	// Character crossing bottom - currentPos = 600
+
 	if ( position === 'vertical') {
 		let currentPos = getPosition( element.style.top );
-		if( currentPos <= container.style.height )
+		if( currentPos <= height )
 			element.style.top = `${currentPos + amount}px`;
 		else {
-			while( currentPos > container.style.height )
+			while( currentPos > height )
 				currentPos--;
 			element.style.top = `${currentPos + amount}px`;
 		}
