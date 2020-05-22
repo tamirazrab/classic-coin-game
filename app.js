@@ -27,13 +27,15 @@ window.addEventListener('keydown' , function( event ) {
 		 	// It's top so character should suppose to go upward
 		 	// not downwards subracting instead of adding
 		 	// don't want the case of inverted controls.
-			let currentTop = getPosition( character.style.top );
-			// if ( currentTop <= window.innerWidth )
-				character.style.top = `${currentTop - 55}px`;
+			// let currentTop = getPosition( character.style.top );
+			// // if ( currentTop <= window.innerWidth )
+			// 	character.style.top = `${currentTop - 55}px`;
+				moveCharacter( character , 'vertical' , -50 );
 			break;
 		case 'ArrowDown':
-			let currentDown = getPosition( character.style.top );
-			character.style.top = `${currentDown + 55}px`;
+			// let currentDown = getPosition( character.style.top );
+			// character.style.top = `${currentDown + 55}px`;
+			moveCharacter( character , 'vertical' , 50 );
 			break;
 		case 'ArrowRight':
 			let currentRight = getPosition( character.style.left );
@@ -47,9 +49,36 @@ window.addEventListener('keydown' , function( event ) {
 			character.style.transform = 'scale( -1 , 1)';
 			break;				
 	}
-	if ( isTouching( character , coin ) )
+	
+	if ( isTouching( character , coin ) ) 
 		moveCoin();
-})
+
+});
+
+const moveCharacter = ( element , position , amount ) => {
+	if ( !container.style.width || !container.style.height ) {
+		container.style.width = `900px`;
+		container.style.height = `700px`;
+	}
+
+	let width = parseInt( container.style.width.slice( 0 , -2 ));
+	let height = parseInt( container.style.height.slice( 0 , -2 ));
+
+	if ( position === 'vertical') {
+		let currentPos = getPosition( element.style.top );
+		if( currentPos <= container.style.height )
+			element.style.top = `${currentPos + amount}px`;
+		else {
+			while( currentPos > container.style.height )
+				currentPos--;
+			element.style.top = `${currentPos + amount}px`;
+		}
+	} else if ( position === 'horizontal' ) {
+		let currentPos = getPosition( element.style.left );
+		element.style.left = `${currentPos + amount}px`;
+	} else
+		return;
+}
 
 const getPosition = ( position ) => {
 	// slice, slices the number of characters specified in the length
